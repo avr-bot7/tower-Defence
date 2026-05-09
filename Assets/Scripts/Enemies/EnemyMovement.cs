@@ -19,7 +19,12 @@ public class EnemyMovement : MonoBehaviour
         Vector3   dir    = (target.position - transform.position).normalized;
 
         transform.position += dir * _enemy.speed * Time.deltaTime;
-        transform.LookAt(target.position);   // face movement direction
+
+        // Rotate only on the Y axis so the enemy doesn't pitch into slopes.
+        Vector3 lookDir = target.position - transform.position;
+        lookDir.y = 0;
+        if (lookDir.sqrMagnitude > Mathf.Epsilon)
+            transform.rotation = Quaternion.LookRotation(lookDir);
 
         if (Vector3.Distance(transform.position, target.position) < 0.5f)
         {

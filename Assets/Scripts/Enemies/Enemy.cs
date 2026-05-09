@@ -59,7 +59,7 @@ public class Enemy : MonoBehaviour
         }
         else yield return new WaitForSeconds(1.5f);
 
-        GameManager.I.AddGold(100);
+        GameManager.I.AddGold(goldDrop);
         if (WaveManager.I != null)
             WaveManager.I.OnEnemyRemoved();
 
